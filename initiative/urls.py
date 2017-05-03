@@ -6,5 +6,5 @@ urlpatterns = [
     # ex: /initiative/
     url(r'^$', views.index, name='index'),
     # ex: /iniative/Marius/
-    url(r'^(?P<hero_name>[A-Za-z]+)/$', views.hero, name='hero'),
+    url(r'^(?P<hero_name>[\w\s]+)/$', views.hero, name='hero'),
 ]
