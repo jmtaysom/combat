@@ -4,3 +4,8 @@ from django.http import HttpResponse
 # Create your views here.
 def index(request):
     return HttpResponse('This will be the initiative tracker')
+
+
+def hero(request, hero_name):
+    response = f'{hero_name}'
+    return HttpResponse(response)
