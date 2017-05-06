@@ -1,13 +1,29 @@
+{%  load initiative_extras %}
 {%  if character %}
     <h3>{{ character.name }}</h3>
     <table>
-        <tr><td>Initiative:</td> <td>{{ character.initiative }}</td>
-        <tr><td>Armor class:</td> <td>{{ character.armor_class }}</td>
-        <tr><td>Fortitude:</td> <td>{{ character.fortitude }}</td>
-        <tr><td>Reflex:</td> <td>{{ character.reflex }}</td>
-        <tr><td>Will:</td> <td>{{ character.will }}</td>
-        <tr><td>Hit points:</td> <td>{{ character.hit_points }}</td>
-        <tr><td>Notes:</td> <td>{{ character.notes }}</td>
+        <tr>
+            <td>Initiative:</td> 
+            <td>{{ character.initiative }}</td>
+        </tr>
+        <tr>
+			<td>Armor class:</td>
+			<td>{{ character.armor_class }}</td>
+        <tr>
+			<td>Fortitude:</td>
+			<td>{{ character.fortitude|sign }}</td>
+        <tr>
+			<td>Reflex:</td>
+			<td>{{ character.reflex|sign  }}</td>
+        <tr>
+			<td>Will:</td>
+			<td>{{ character.will|sign  }}</td>
+        <tr>
+			<td>Hit points:</td>
+			<td>{{ character.hit_points }}</td>
+        <tr>
+			<td>Notes:</td>
+			<td>{{ character.notes }}</td>
     </table>
 {%  else %}
     <p> There is no character by this name</p>
