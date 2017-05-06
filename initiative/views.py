@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 
 from .models import Character
+
 
 # Create your views here.
 def index(request):
@@ -11,5 +11,5 @@ def index(request):
 
 
 def hero(request, hero_name):
-    response = f'{hero_name}'
-    return HttpResponse(response)
+    character = get_object_or_404(Character, name=hero_name)
+    return render(request, 'initiative/character.html', {'character': character})
