@@ -1,7 +1,11 @@
-{%  load initiative_extras %}
+{% load initiative_extras %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'initiative/styles.css' %}" />
+
 {%  if character %}
     <h3>{{ character.name }}</h3>
-    <table>
+    <table class="detail">
         <tr>
             <td>Initiative:</td> 
             <td>{{ character.initiative }}</td>
