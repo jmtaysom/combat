@@ -4,8 +4,8 @@
 <link rel="stylesheet" type="text/css" href="{% static 'initiative/styles.css' %}" />
 
 {%  if character %}
-    <h3>{{ character.name }}</h3>
-    <table class="detail">
+    <table class="center">
+        <th colspan="2">{{ character.name }}</th>
         <tr>
             <td>Initiative:</td> 
             <td>{{ character.initiative }}</td>

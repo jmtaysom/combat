@@ -1,9 +1,20 @@
+th, td {
+    padding: 5px;
+}
+
 tr:nth-child(even) {background-color: #f2f2f2}
 
 th {
     background-color: #4CAF50;
     color: white;
+}
 
-.table.detail td:first-child {
+td:first-child {
     text-align: right;
-}​
+}
+
+table.center {
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 50px;
+  }
