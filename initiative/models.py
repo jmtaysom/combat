@@ -9,6 +9,7 @@ class Character(models.Model):
     reflex = models.IntegerField()
     will = models.IntegerField()
     hit_points = models.IntegerField()
+    damage_taken = models.IntegerField(default=0)
     notes = models.CharField(max_length=200, blank=True)
 
     def __str__(self):

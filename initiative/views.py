@@ -12,4 +12,6 @@ def index(request):
 
 def hero(request, hero_name):
     character = get_object_or_404(Character, name=hero_name)
-    return render(request, 'initiative/character.html', {'character': character})
+    current_hp = character.hit_points - character.damage_taken
+    return render(request, 'initiative/character.html',
+                  {'character': character, 'current_hp': current_hp})
