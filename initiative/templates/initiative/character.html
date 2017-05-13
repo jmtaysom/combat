@@ -3,38 +3,53 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'initiative/styles.css' %}" />
 
-{%  if character %}
-    <table class="center">
-        <th colspan="2">{{ character.name }}</th>
-        <tr>
-            <td>Initiative:</td> 
-            <td><input type="text" value={{ character.initiative }}></td>
-        </tr>
-        <tr>
-			<td>Armor class:</td>
-			<td>{{ character.armor_class }}</td>
-        <tr>
-			<td>Fortitude:</td>
-			<td>{{ character.fortitude|sign }}</td>
-        <tr>
-			<td>Reflex:</td>
-			<td>{{ character.reflex|sign  }}</td>
-        <tr>
-			<td>Will:</td>
-			<td>{{ character.will|sign  }}</td>
-        <tr>
-			<td>Hit points:</td>
-			<td>{{ character.hit_points }}</td>
-        <tr>
-			<td>Damage: </td>
-			<td>{{ character.damage_taken }}</td>
-        <tr>
-			<td>Current HP:</td>
-			<td>{{ current_hp }}</td>
-        <tr>
-			<td>Notes:</td>
-			<td>{{ character.notes }}</td>
-    </table>
+{% if character %}
+    <form action="{% url 'initiative:update' character.name %}" method="post">
+        {% csrf_token %}
+        <table class="center">
+            <th colspan="2">{{ character.name }}</th>
+			<tr>
+                <td>Initiative:</td>
+                <td><input type="text" value={{ character.initiative }}></td>
+
+            </tr>
+			<tr>
+                <td>Armor class:</td>
+                <td><input type="text" value={{ character.armor_class }}></td>
+            </tr>
+			<tr>
+                <td>Fortitude:</td>
+                <td><input type="text" value={{ character.fortitude }}></td>
+            </tr>
+			<tr>
+                <td>Reflex:</td>
+                <td><input type="text" value={{ character.reflex }}></td>
+            </tr>
+			<tr>
+                <td>Will:</td>
+                <td><input type="text" value={{ character.will }}></td>
+            </tr>
+			<tr>
+                <td>Hit points:</td>
+                <td><input type="text" value={{ character.hit_points }}></td>
+            </tr>
+			<tr>
+                <td>Damage: </td>
+                <td><input type="text" value={{ character.damage_taken }}></td>
+            </tr>
+			<tr>
+                <td>Current HP:</td>
+                <td><input type="text" value={{ current_hp }}></td>
+            </tr>
+			<tr>
+                <td>Notes:</td>
+                <td><input type="text" value={{ character.notes }}></td>
+            <tr>
+                <td><input type="submit" value="Save"/></td>
+            </tr>
+        </table>
+    </form>
+
 {%  else %}
     <p> There is no character by this name</p>
 {% endif %}
