@@ -15,3 +15,6 @@ def hero(request, hero_name):
     current_hp = character.hit_points - character.damage_taken
     return render(request, 'initiative/character.html',
                   {'character': character, 'current_hp': current_hp})
+
+def update(request, hero_name):
+    return HttpResponse("You're updating {}}".format(hero_name))

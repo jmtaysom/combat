@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # ex: /iniative/Marius/
     url(r'^(?P<hero_name>[\w\s]+)/$', views.hero, name='hero'),
+    url(r'^(?P<hero_name>[\w\s]+)/update/$', views.update, name='update'),
 ]
