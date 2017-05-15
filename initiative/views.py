@@ -1,5 +1,7 @@
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 
+from .forms import CharacterForm
 from .models import Character
 
 
@@ -17,4 +19,6 @@ def hero(request, hero_name):
                   {'character': character, 'current_hp': current_hp})
 
 def update(request, hero_name):
-    return HttpResponse("You're updating {}}".format(hero_name))
+    character = get_object_or_404(Character, name=hero_name)
+    form = CharacterForm(instance=character)
+    return render(request, 'initiative/update.html', {'form':form})

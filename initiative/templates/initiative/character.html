@@ -3,6 +3,7 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'initiative/styles.css' %}" />
 
+
 {% if character %}
     <form action="{% url 'initiative:update' character.name %}" method="post">
         {% csrf_token %}
