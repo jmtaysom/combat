@@ -6,9 +6,10 @@ th, td {
 
 tr:nth-child(even) {background-color: #f2f2f2}
 
-th {
+thead {
     background-color: #4CAF50;
     color: white;
+    child-align: right;
 }
 
 td:first-child {
@@ -20,3 +21,8 @@ table.center {
     margin-right:auto;
     margin-top: 50px;
   }
+
+label {
+    float: right;
+    display: inline-block;
+}
