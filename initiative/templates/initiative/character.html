@@ -11,42 +11,42 @@
             <th colspan="2">{{ character.name }}</th>
 			<tr>
                 <td>Initiative:</td>
-                <td><input type="text" value={{ character.initiative }}></td>
+                <td> {{ character.initiative }} </td>
 
             </tr>
 			<tr>
                 <td>Armor class:</td>
-                <td><input type="text" value={{ character.armor_class }}></td>
+                <td> {{ character.armor_class }} </td>
             </tr>
 			<tr>
                 <td>Fortitude:</td>
-                <td><input type="text" value={{ character.fortitude }}></td>
+                <td> {{ character.fortitude|sign }} </td>
             </tr>
 			<tr>
                 <td>Reflex:</td>
-                <td><input type="text" value={{ character.reflex }}></td>
+                <td> {{ character.reflex|sign }} </td>
             </tr>
 			<tr>
                 <td>Will:</td>
-                <td><input type="text" value={{ character.will }}></td>
+                <td> {{ character.will|sign }} </td>
             </tr>
 			<tr>
                 <td>Hit points:</td>
-                <td><input type="text" value={{ character.hit_points }}></td>
+                <td> {{ character.hit_points }} </td>
             </tr>
 			<tr>
                 <td>Damage: </td>
-                <td><input type="text" value={{ character.damage_taken }}></td>
+                <td> {{ character.damage_taken }} </td>
             </tr>
 			<tr>
                 <td>Current HP:</td>
-                <td><input type="text" value={{ current_hp }}></td>
+                <td> {{ current_hp }} </td>
             </tr>
 			<tr>
                 <td>Notes:</td>
-                <td><input type="text" value={{ character.notes }}></td>
+                <td> {{ character.notes }} </td>
             <tr>
-                <td><input type="submit" value="Save"/></td>
+                <td><a href="/initiative/{{ character.name }}/update/">Update</a> </td>
             </tr>
         </table>
     </form>
