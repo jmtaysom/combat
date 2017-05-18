@@ -22,6 +22,8 @@ def update(request, hero_name):
     character = get_object_or_404(Character, name=hero_name)
     if request.method == "POST":
         form = CharacterForm(request.POST, instance=character)
+    else:
+        form = CharacterForm(instance=character)
     if form.is_valid():
         form.save()
     return render(request, 'initiative/update.html', {'form':form})
