@@ -7,7 +7,7 @@
 {% if character %}
 
     <table class="center">
-        <thead colspan="2">{{ character.name }}</thead>
+        <thead><th colspan="2">{{ character.name }}</th></thead>
         <tr>
             <td>Initiative:</td>
             <td> {{ character.initiative }} </td>
@@ -45,7 +45,7 @@
             <td>Notes:</td>
             <td> {{ character.notes }} </td>
         <tr>
-            <td><a href="/initiative/{{ character.name }}/update/">Update</a> </td>
+            <td colspan="2"><a href="/initiative/{{ character.name }}/update/">Update</a> </td>
         </tr>
     </table>
 
