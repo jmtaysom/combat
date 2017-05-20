@@ -12,6 +12,12 @@ def index(request):
     return render(request, 'initiative/index.html', context)
 
 
+def characters(request):
+    character_list = Character.objects.order_by('name')
+    context = {'character_list': character_list}
+    return render(request, 'initiative/character_list.html', context)
+
+
 def hero(request, hero_name):
     character = get_object_or_404(Character, name=hero_name)
     current_hp = character.hit_points - character.damage_taken
