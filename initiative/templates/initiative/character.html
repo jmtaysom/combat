@@ -1,55 +1,54 @@
-{% load initiative_extras %}
-{% load static %}
+{% extends 'initiative/base.html' %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'initiative/styles.css' %}" />
+{% block content %}
+    {% load initiative_extras %}
+    {% if character %}
 
+        <table class="center">
+            <thead><th colspan="2">{{ character.name }}</th></thead>
+            <tr>
+                <td>Initiative:</td>
+                <td> {{ character.initiative }} </td>
 
-{% if character %}
-
-    <table class="center">
-        <thead><th colspan="2">{{ character.name }}</th></thead>
-        <tr>
-            <td>Initiative:</td>
-            <td> {{ character.initiative }} </td>
-
-        </tr>
-        <tr>
-            <td>Armor class:</td>
-            <td> {{ character.armor_class }} </td>
-        </tr>
-        <tr>
-            <td>Fortitude:</td>
-            <td> {{ character.fortitude|sign }} </td>
-        </tr>
-        <tr>
-            <td>Reflex:</td>
-            <td> {{ character.reflex|sign }} </td>
-        </tr>
-        <tr>
-            <td>Will:</td>
-            <td> {{ character.will|sign }} </td>
-        </tr>
-        <tr>
-            <td>Hit points:</td>
-            <td> {{ character.hit_points }} </td>
-        </tr>
-        <tr>
-            <td>Damage: </td>
-            <td> {{ character.damage_taken }} </td>
-        </tr>
-        <tr>
-            <td>Current HP:</td>
-            <td> {{ current_hp }} </td>
-        </tr>
-        <tr>
-            <td>Notes:</td>
-            <td> {{ character.notes }} </td>
-        <tr>
-            <td colspan="2"><a href="/initiative/{{ character.name }}/update/">Update</a> </td>
-        </tr>
-    </table>
+            </tr>
+            <tr>
+                <td>Armor class:</td>
+                <td> {{ character.armor_class }} </td>
+            </tr>
+            <tr>
+                <td>Fortitude:</td>
+                <td> {{ character.fortitude|sign }} </td>
+            </tr>
+            <tr>
+                <td>Reflex:</td>
+                <td> {{ character.reflex|sign }} </td>
+            </tr>
+            <tr>
+                <td>Will:</td>
+                <td> {{ character.will|sign }} </td>
+            </tr>
+            <tr>
+                <td>Hit points:</td>
+                <td> {{ character.hit_points }} </td>
+            </tr>
+            <tr>
+                <td>Damage: </td>
+                <td> {{ character.damage_taken }} </td>
+            </tr>
+            <tr>
+                <td>Current HP:</td>
+                <td> {{ current_hp }} </td>
+            </tr>
+            <tr>
+                <td>Notes:</td>
+                <td> {{ character.notes }} </td>
+            <tr>
+                <td colspan="2"><a href="/{{ character.name }}/update/">Update</a> </td>
+            </tr>
+        </table>
 
 
-{%  else %}
-    <p> There is no character by this name</p>
-{% endif %}
+    {%  else %}
+        <p> There is no character by this name</p>
+    {% endif %}
+{% endblock %}

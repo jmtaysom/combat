@@ -1,16 +1,20 @@
-{%  if character_list %}
-    <table>
-    <tr>
-        <th>Name</th>
-        <th>Initiative</th>
-    </tr>
-    {% for character in character_list %}
+{% extends 'initiative/base.html' %}
+
+{% block content %}
+    {% if character_list %}
+        <table>
         <tr>
-            <td><a href="/initiative/{{ character.name }}/">{{character.name}}</a></td>
-            <td>{{ character.initiative }}</td>
+            <th>Name</th>
+            <th>Initiative</th>
         </tr>
-    {% endfor %}
-    <table/>
-{%  else %}
-    <p> No characters are ready for battle.</p>
-{% endif %}
+        {% for character in character_list %}
+            <tr>
+                <td><a href="/initiative/{{ character.name }}/">{{character.name}}</a></td>
+                <td>{{ character.initiative }}</td>
+            </tr>
+        {% endfor %}
+        <table/>
+    {% else %}
+        <p> No characters are ready for battle.</p>
+    {% endif %}
+{% endblock %}
