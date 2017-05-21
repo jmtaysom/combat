@@ -1,0 +1,7 @@
+*.sqlite3
+.idea
+*.pyc
+combat/__pycache__/
+initiative/__pycache__/
+initiative/migrations/__pycache__/
+initiative/templatetags/__pycache__/
