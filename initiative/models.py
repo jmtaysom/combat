@@ -11,6 +11,7 @@ class Character(models.Model):
     hit_points = models.IntegerField()
     damage_taken = models.IntegerField(default=0)
     notes = models.CharField(max_length=200, blank=True)
+    unique = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
