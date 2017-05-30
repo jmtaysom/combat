@@ -8,7 +8,11 @@ from .models import Character
 # Create your views here.
 def index(request):
     character_list = Character.objects.order_by('-initiative')
-    context = {'character_list': character_list}
+    character_list_count = []
+    for character in character_list:
+        for i in range(character.count):
+            character_list_count.append(character)
+    context = {'character_list': character_list_count}
     return render(request, 'initiative/index.html', context)
 
 
