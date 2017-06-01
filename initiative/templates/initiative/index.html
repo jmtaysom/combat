@@ -9,7 +9,7 @@
         </tr>
         {% for character in character_list %}
             <tr>
-                <td><a href="{{ character.name }}/">{{character.name}}</a></td>
+                <td><a href="characters/{{ character.name }}/">{{character.name}}</a></td>
                 <td>{{ character.initiative }}</td>
             </tr>
         {% endfor %}
