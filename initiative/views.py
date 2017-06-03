@@ -1,5 +1,5 @@
-from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.forms import modelformset_factory
 
 from .forms import CharacterForm
 from .models import Character
@@ -17,9 +17,15 @@ def index(request):
 
 
 def characters(request):
-    character_list = Character.objects.order_by('name')
-    context = {'character_list': character_list}
-    return render(request, 'initiative/character_list.html', context)
+    CharacterFormSet = modelformset_factory(Character, fields=('name', 'count'), extra=0)
+    if request.method == 'POST':
+        formset = CharacterFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
+    else:
+        formset = CharacterFormSet()
+    return render(request, 'initiative/character_list.html', {'formset': formset})
+
 
 
 def hero(request, hero_name):

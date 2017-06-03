@@ -1,19 +1,7 @@
 {% extends 'initiative/base.html' %}
 
 {% block content %}
-    {% if character_list %}
-        <table>
-        <tr>
-            <th>Name</th>
-
-        </tr>
-        {% for character in character_list %}
-            <tr>
-                <td><a href="{{ character.name }}/">{{character.name}}</a></td>
-            </tr>
-        {% endfor %}
-        <table/>
-    {% else %}
-        <p> Please create some characters.</p>
-    {% endif %}
+    <form method="post" action="">
+        {{ formset }}
+    </form>
 {% endblock %}
