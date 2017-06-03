@@ -2,6 +2,19 @@
 
 {% block content %}
     <form method="post" action="">
-        {{ formset }}
+        {{ formset.management_form }}
+        <table>
+        <tr>
+            <th>Character</th>
+            <th>Count</th>
+        </tr>
+        {% for form in formset %}
+            {{ form.id }}
+            <tr>
+                <td>{{ form.name }}</td>
+                <td>{{ form.count }}</td>
+            </tr>
+        {% endfor %}
+        </table>
     </form>
 {% endblock %}
