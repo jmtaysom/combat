@@ -17,15 +17,25 @@ def index(request):
 
 
 def characters(request):
-    CharacterFormSet = modelformset_factory(Character, fields=('name', 'count'), extra=0, form=CountForm)
+    CharacterFormSet = modelformset_factory(Character, extra=0, form=CountForm)
     if request.method == 'POST':
         formset = CharacterFormSet(request.POST, request.FILES)
     else:
-        formset = CharacterFormSet()
+        formset = CharacterFormSet(queryset=Character.objects.filter(unique=True))
     if formset.is_valid():
         formset.save()
     return render(request, 'initiative/character_list.html', {'formset': formset})
 
+
+def monsters(request):
+    CharacterFormSet = modelformset_factory(Character, extra=0, form=CountForm)
+    if request.method == 'POST':
+        formset = CharacterFormSet(request.POST, request.FILES)
+    else:
+        formset = CharacterFormSet(queryset=Character.objects.filter(unique=False))
+    if formset.is_valid():
+        formset.save()
+    return render(request, 'initiative/character_list.html', {'formset': formset})
 
 
 def hero(request, hero_name):
