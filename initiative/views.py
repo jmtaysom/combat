@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.forms import modelformset_factory
 
-from .forms import CharacterForm
+from .forms import CharacterForm, CountForm
 from .models import Character
 
 
@@ -17,13 +17,13 @@ def index(request):
 
 
 def characters(request):
-    CharacterFormSet = modelformset_factory(Character, fields=('name', 'count'), extra=0)
+    CharacterFormSet = modelformset_factory(Character, fields=('name', 'count'), extra=0, form=CountForm)
     if request.method == 'POST':
         formset = CharacterFormSet(request.POST, request.FILES)
-        if formset.is_valid():
-            formset.save()
     else:
         formset = CharacterFormSet()
+    if formset.is_valid():
+        formset.save()
     return render(request, 'initiative/character_list.html', {'formset': formset})
 
 

@@ -3,18 +3,22 @@
 {% block content %}
     <form method="post" action="">
         {{ formset.management_form }}
+        {% csrf_token %}
         <table>
-        <tr>
-            <th>Character</th>
-            <th>Count</th>
-        </tr>
-        {% for form in formset %}
-            {{ form.id }}
             <tr>
-                <td>{{ form.name }}</td>
-                <td>{{ form.count }}</td>
+                <th>Character</th>
+                <th>Count</th>
             </tr>
-        {% endfor %}
+            {% for form in formset %}
+                {{ form.id }}
+                <tr>
+                    <td>{{ form.name }}</td>
+                    <td>{{ form.count }}</td>
+                </tr>
+            {% endfor %}
+            <tfoot>
+                <td colspan="2"><button type="submit" class="save btn btn-default">Save</button></td>
+            </tfoot>
         </table>
     </form>
 {% endblock %}
