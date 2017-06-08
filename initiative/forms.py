@@ -10,6 +10,7 @@ class CharacterForm(ModelForm):
 
 
 class CountForm(ModelForm):
+    #TODO: if unnique is true render the form as a checkbox
     class Meta:
         Model = Character
         fields = ['name', 'count', 'unique']
