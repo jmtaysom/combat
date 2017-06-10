@@ -1,4 +1,4 @@
-from django.forms import ModelForm, BaseModelFormSet
+from django.forms import ModelForm, CheckboxInput
 
 from initiative.models import Character
 
@@ -19,4 +19,12 @@ class CountForm(ModelForm):
         super(CountForm, self).__init__(*args, **kwargs)
         if self.instance.id:
             self.fields['name'].widget.attrs['readonly'] = True
+
+
+class CharacterCountForm(CountForm):
+    def __init__(self, *args, **kwargs):
+        super(CharacterCountForm, self).__init__(*args, **kwargs)
+        if self.instance.id:
+            self.fields['name'].widget.attrs['readonly'] = True
+        self.fields['count'].widget = CheckboxInput()
 
