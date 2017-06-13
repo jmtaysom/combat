@@ -1,23 +1,6 @@
-import six
-from django.forms import ModelForm, CheckboxInput
-
+from django.forms import ModelForm
 from initiative.models import Player, Monster
 
-def int_test(v):
-    return not (v is 0 or v is None or v == '')
-
-class IntCheckboxInput(CheckboxInput):
-    def value_from_datadict(self, data, files, name):
-        if name not in data:
-            # A missing value means False because HTML form submission does not
-            # send results for unselected checkboxes.
-            return 0
-        value = data.get(name)
-        # Translate true and false strings to boolean values.
-        values = {'true': True, 'false': False}
-        if isinstance(value, six.string_types):
-            value = values.get(value.lower(), value)
-        return int(bool(value))
 
 class CharacterForm(ModelForm):
     class Meta:
@@ -36,7 +19,7 @@ class CountForm(ModelForm):
             self.fields['name'].widget.attrs['readonly'] = True
 
 
-class CharacterCountForm(CountForm):
+class CharacterCountForm(ModelForm):
     class Meta:
         Model = Player
         fields = ['name', 'present']
@@ -45,4 +28,4 @@ class CharacterCountForm(CountForm):
         super(CharacterCountForm, self).__init__(*args, **kwargs)
         if self.instance.id:
             self.fields['name'].widget.attrs['readonly'] = True
-        self.fields['count'].widget = IntCheckboxInput(check_test=int_test)
+
