@@ -2,38 +2,35 @@ from django.shortcuts import render, get_object_or_404
 from django.forms import modelformset_factory
 
 from .forms import CharacterForm, CountForm, CharacterCountForm
-from .models import Character
+from .models import Player, Monster
 
 
 # Create your views here.
 def index(request):
-    character_list = Character.objects.order_by('-initiative')
-    character_list_count = []
-    for character in character_list:
-        for i in range(character.count):
-            character_list_count.append(character)
-    context = {'character_list': character_list_count}
+    character_list = Player.objects.filter(present=True).order_by('-initiative')
+    print(character_list)
+    context = {'character_list': character_list}
     return render(request, 'initiative/index.html', context)
 
 
 def characters(request):
-    CharacterFormSet = modelformset_factory(Character, extra=0, form=CharacterCountForm)
+    CharacterFormSet = modelformset_factory(Player, extra=0, form=CharacterCountForm)
     if request.method == 'POST':
         formset = CharacterFormSet(request.POST, request.FILES)
     else:
-        formset = CharacterFormSet(queryset=Character.objects.filter(unique=True))
+        formset = CharacterFormSet(queryset=Player.objects.filter(unique=True))
     if formset.is_valid():
         formset.save()
     return render(request, 'initiative/character_list.html', {'formset': formset})
 
 
 def monsters(request):
-    CharacterFormSet = modelformset_factory(Character, extra=0, form=CountForm)
+    CharacterFormSet = modelformset_factory(Monster, extra=0, form=CountForm)
     if request.method == 'POST':
         formset = CharacterFormSet(request.POST, request.FILES)
         print(request.POST)
     else:
-        formset = CharacterFormSet(queryset=Character.objects.filter(unique=False))
+        formset = CharacterFormSet(queryset=Monster.objects.all())
     if formset.is_valid():
         formset.save()
     return render(request, 'initiative/character_list.html', {'formset': formset})

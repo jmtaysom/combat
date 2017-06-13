@@ -11,8 +11,9 @@ class Character(models.Model):
     hit_points = models.IntegerField()
     damage_taken = models.IntegerField(default=0)
     notes = models.CharField(max_length=200, blank=True)
-    unique = models.BooleanField(default=False)
-    count = models.IntegerField(default=0)
+
+    class Meta:
+        abstract = False
 
     def __str__(self):
         return self.name
@@ -21,3 +22,9 @@ class Character(models.Model):
         return self.hit_points >= 0
 
 
+class Player(Character):
+    present = models.BooleanField(default=True)
+
+
+class Monster(Character):
+    count = models.IntegerField(default=0)
