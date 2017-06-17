@@ -1,5 +1,7 @@
 from itertools import chain
 from operator import attrgetter
+from random import randint
+from copy import deepcopy
 
 from django.shortcuts import render, get_object_or_404
 from django.forms import modelformset_factory
@@ -15,8 +17,11 @@ def index(request):
     monster_list = Monster.objects.filter(count__gt=0)
     multiple_monsters = []
     for monster in monster_list:
+        init = monster.initiative
         for _ in range(monster.count):
-            multiple_monsters.append(monster)
+            m = deepcopy(monster)
+            m.initiative = randint(1,20)+init
+            multiple_monsters.append(m)
     result_list = sorted(
         chain(character_list, multiple_monsters),
         key=attrgetter('initiative'),
