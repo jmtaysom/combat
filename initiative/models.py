@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import int_list_validator
 
 
 class Character(models.Model):
@@ -28,3 +29,4 @@ class Player(Character):
 
 class Monster(Character):
     count = models.IntegerField(default=0)
+    initiative_rolls = models.CharField(validators=[int_list_validator], max_length=50, default=0)
