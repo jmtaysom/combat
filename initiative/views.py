@@ -1,3 +1,6 @@
+from itertools import chain
+from operator import attrgetter
+
 from django.shortcuts import render, get_object_or_404
 from django.forms import modelformset_factory
 
@@ -9,8 +12,17 @@ from .models import Player, Monster
 def index(request):
     #TODO: need to add in monsters to the return.
     character_list = Player.objects.filter(present=True).order_by('-initiative')
+    monster_list = Monster.objects.filter(count__gt=0)
+    multiple_monsters = []
+    for monster in monster_list:
+        for _ in range(monster.count):
+            multiple_monsters.append(monster)
+    result_list = sorted(
+        chain(character_list, multiple_monsters),
+        key=attrgetter('initiative'),
+        reverse=True)
     print(character_list)
-    context = {'character_list': character_list}
+    context = {'character_list': result_list}
     return render(request, 'initiative/index.html', context)
 
 
