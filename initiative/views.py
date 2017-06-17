@@ -16,10 +16,9 @@ def index(request):
     monster_list = Monster.objects.filter(count__gt=0)
     multiple_monsters = []
     for monster in monster_list:
-        init = monster.initiative
-        for _ in range(monster.count):
+        for init in monster.initiative_rolls.split(','):
             m = deepcopy(monster)
-            m.initiative = randint(1,20)+init
+            m.initiative = int(init)
             multiple_monsters.append(m)
     result_list = sorted(
         chain(character_list, multiple_monsters),
