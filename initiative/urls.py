@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^monsters/$', views.monsters, name='monsters'),
     # ex: /Marius/
     url(r'^characters/(?P<hero_name>[\w\s]+)/$', views.hero, name='hero'),
+    url(r'^characters/(?P<hero_name>[\w\s]+)/(?P<init>[0-9]+)/$', views.initiative, name='hero'),
     url(r'^characters/(?P<hero_name>[\w\s]+)/update/$', views.update, name='update'),
 
 ]

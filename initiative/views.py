@@ -1,9 +1,8 @@
 from itertools import chain
 from operator import attrgetter
-from random import randint
 from copy import deepcopy
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.forms import modelformset_factory
 
 from .forms import CharacterForm, CountForm, CharacterCountForm
@@ -66,3 +65,11 @@ def update(request, hero_name):
     if form.is_valid():
         form.save()
     return render(request, 'initiative/update.html', {'form':form})
+
+
+def initiative(request, hero_name, init):
+    character = get_object_or_404(Player, name=hero_name)
+    print(init)
+    character.initiative = init
+    character.save()
+    return redirect(f'/characters/{hero_name}/')
