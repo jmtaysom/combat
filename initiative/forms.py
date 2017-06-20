@@ -20,6 +20,7 @@ class CountForm(ModelForm):
 
 
 class CharacterCountForm(ModelForm):
+    #TODO: update the form to not be a text field and make it link to the character
     class Meta:
         Model = Player
         fields = ['name', 'present']
