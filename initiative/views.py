@@ -11,6 +11,7 @@ from .models import Player, Monster
 
 # Create your views here.
 def index(request):
+    #TODO: allow for the removal of characters or monsters with a click of a button
     character_list = Player.objects.filter(present=True).order_by('-initiative')
     monster_list = Monster.objects.filter(count__gt=0)
     multiple_monsters = []
@@ -40,6 +41,7 @@ def characters(request):
 
 
 def monsters(request):
+    #TODO: add in handling for monster initiative. Something that also allows for removal of the monsters one at a time.
     CharacterFormSet = modelformset_factory(Monster, extra=0, form=CountForm)
     if request.method == 'POST':
         formset = CharacterFormSet(request.POST, request.FILES)
