@@ -5,7 +5,7 @@ from copy import deepcopy
 from django.shortcuts import render, get_object_or_404, redirect
 from django.forms import modelformset_factory
 
-from .forms import CharacterForm, CountForm, CharacterCountForm
+from .forms import CharacterForm, CountForm, CharacterCountForm, MonsterForm
 from .models import Player, Monster
 
 
@@ -18,6 +18,7 @@ def index(request):
     for monster in monster_list:
         for init in monster.initiative_rolls.split(','):
             m = deepcopy(monster)
+            m.is_monster = True
             m.initiative = int(init)
             multiple_monsters.append(m)
     result_list = sorted(
@@ -53,17 +54,37 @@ def monsters(request):
 
 
 def hero(request, hero_name):
+    #TODO: combine views for characters and monsters again.
     character = get_object_or_404(Player, name=hero_name)
     current_hp = character.hit_points - character.damage_taken
     return render(request, 'initiative/character.html',
                   {'character': character, 'current_hp': current_hp})
+
+
+def monster_detail(request, monster_name):
+    monster = get_object_or_404(Monster, name=monster_name)
+    current_hp = monster.hit_points - monster.damage_taken
+    return render(request, 'initiative/character.html',
+                  {'character': monster, 'current_hp': current_hp})
+
 
 def update(request, hero_name):
     character = get_object_or_404(Player, name=hero_name)
     if request.method == "POST":
         form = CharacterForm(request.POST, instance=character)
     else:
-        form = CharacterForm(instance=Player)
+        form = CharacterForm(instance=character)
+    if form.is_valid():
+        form.save()
+    return render(request, 'initiative/update.html', {'form':form})
+
+
+def monster_update(request, monster_name):
+    monster = get_object_or_404(Monster, name=monster_name)
+    if request.method == "POST":
+        form = MonsterForm(request.POST, instance=monster)
+    else:
+        form = MonsterForm(instance=monster)
     if form.is_valid():
         form.save()
     return render(request, 'initiative/update.html', {'form':form})

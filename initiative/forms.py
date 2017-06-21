@@ -8,6 +8,11 @@ class CharacterForm(ModelForm):
         fields = '__all__'
 
 
+class MonsterForm(ModelForm):
+    class Meta:
+        model = Monster
+        fields = '__all__'
+
 class CountForm(ModelForm):
     class Meta:
         Model = Monster

@@ -1,0 +1,13 @@
+{% extends 'initiative/base.html' %}
+
+{% block content %}
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        <table class="center">
+            {{ form.as_table }}
+            <tfoot>
+                <td colspan="2"><button type="submit" class="save btn btn-default">Save</button></td>
+            </tfoot>
+        </table>
+    </form>
+{% endblock %}
