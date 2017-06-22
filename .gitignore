@@ -7,3 +7,5 @@ initiative/migrations/__pycache__/
 initiative/templatetags/__pycache__/
 .DS_Store
 *.log
+tests/.cache/
+tests/__pycache__/
