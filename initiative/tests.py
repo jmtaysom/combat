@@ -5,7 +5,7 @@ from django.http import HttpRequest
 from initiative.views import index
 
 
-class HomePageTest(TestCase):
+class IndexTest(TestCase):
 
     def test_root_url_resolves_to_home_page_view(self):
         found = resolve('/')
