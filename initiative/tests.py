@@ -17,6 +17,7 @@ class IndexTest(TestCase):
         html = response.content.decode('utf8')
         self.assertTrue(html.startswith('\n\n<html>'))
         self.assertIn('<title>Combat Tracker</title>', html)
+        self.assertIn('<p> No characters are ready for battle.</p>', html)
         self.assertTrue(html.endswith('</html>'))
 
 
@@ -32,6 +33,7 @@ class CharactersTest(TestCase):
         html = response.content.decode('utf8')
         self.assertTrue(html.startswith('\n\n<html>'))
         self.assertIn('<title>Combat Tracker</title>', html)
+        self.assertIn('<table>', html)
         self.assertTrue(html.endswith('</html>'))
 
 
@@ -47,4 +49,5 @@ class MonstersTest(TestCase):
         html = response.content.decode('utf8')
         self.assertTrue(html.startswith('\n\n<html>'))
         self.assertIn('<title>Combat Tracker</title>', html)
+        self.assertIn('<table>', html)
         self.assertTrue(html.endswith('</html>'))
