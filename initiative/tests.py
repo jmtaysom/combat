@@ -2,7 +2,7 @@ from django.core.urlresolvers import resolve
 from django.test import TestCase
 from django.http import HttpRequest
 
-from initiative.views import index, characters
+from initiative.views import index, characters, monsters
 
 
 class IndexTest(TestCase):
@@ -29,6 +29,21 @@ class CharactersTest(TestCase):
     def test_characters_returns_correct_html(self):
         request = HttpRequest()
         response = characters(request)
+        html = response.content.decode('utf8')
+        self.assertTrue(html.startswith('\n\n<html>'))
+        self.assertIn('<title>Combat Tracker</title>', html)
+        self.assertTrue(html.endswith('</html>'))
+
+
+class MonstersTest(TestCase):
+
+    def test_root_url_resolves_to_monster_view(self):
+        found = resolve('/monsters/')
+        self.assertEqual(found.func, monsters)
+
+    def test_monsters_returns_correct_html(self):
+        request = HttpRequest()
+        response = monsters(request)
         html = response.content.decode('utf8')
         self.assertTrue(html.startswith('\n\n<html>'))
         self.assertIn('<title>Combat Tracker</title>', html)
