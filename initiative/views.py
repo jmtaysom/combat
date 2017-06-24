@@ -25,7 +25,6 @@ def index(request):
         chain(character_list, multiple_monsters),
         key=attrgetter('initiative'),
         reverse=True)
-    print(character_list)
     context = {'character_list': result_list}
     return render(request, 'initiative/index.html', context)
 
@@ -92,7 +91,6 @@ def monster_update(request, monster_name):
 
 def initiative(request, hero_name, init):
     character = get_object_or_404(Player, name=hero_name)
-    print(init)
     character.initiative = init
     character.save()
     return redirect(f'/characters/{hero_name}/')
