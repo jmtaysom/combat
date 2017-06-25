@@ -12,6 +12,8 @@ def browser():
 
 def test_title(browser):
     assert 'Combat' in browser.title
-
-
+    header_text = browser.find_element_by_tag_name('h3').text
+    assert 'Initiative' in header_text
+    table = browser.find_element_by_tag_name('table').text
+    assert 'Initiative' in table
 
