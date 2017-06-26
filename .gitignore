@@ -9,3 +9,4 @@ initiative/templatetags/__pycache__/
 *.log
 tests/.cache/
 tests/__pycache__/
+.cache/

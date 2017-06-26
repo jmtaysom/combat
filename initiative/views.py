@@ -33,10 +33,11 @@ def characters(request):
     CharacterFormSet = modelformset_factory(Player, extra=0, form=CharacterCountForm)
     if request.method == 'POST':
         formset = CharacterFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
     else:
         formset = CharacterFormSet(queryset=Player.objects.all())
-    if formset.is_valid():
-        formset.save()
+
     return render(request, 'initiative/character_list.html', {'formset': formset})
 
 
@@ -45,15 +46,16 @@ def monsters(request):
     CharacterFormSet = modelformset_factory(Monster, extra=0, form=CountForm)
     if request.method == 'POST':
         formset = CharacterFormSet(request.POST, request.FILES)
+        if formset.is_valid():
+            formset.save()
     else:
         formset = CharacterFormSet(queryset=Monster.objects.all())
-    if formset.is_valid():
-        formset.save()
+
     return render(request, 'initiative/monster_list.html', {'formset': formset})
 
 
 def hero(request, hero_name):
-    #TODO: combine views for characters and monsters again.
+    # TODO: combine views for characters and monsters again.
     character = get_object_or_404(Player, name=hero_name)
     current_hp = character.hit_points - character.damage_taken
     return render(request, 'initiative/character.html',

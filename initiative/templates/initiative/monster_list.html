@@ -10,7 +10,9 @@
                 <th>Present</th>
             </tr>
             {% for form in formset %}
-                {{ form.id }}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
                 <tr>
                     <td>{{ form.name }}</td>
                     <td>{{ form.count }}</td>
