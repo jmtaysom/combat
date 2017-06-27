@@ -97,4 +97,4 @@ def initiative(request, hero_name, init):
     character = get_object_or_404(Player, name=hero_name)
     character.initiative = init
     character.save()
-    return redirect(f'/characters/{hero_name}/')
+    return redirect('/characters/{}/'.format(hero_name))
