@@ -35,6 +35,7 @@ def characters(request):
         formset = CharacterFormSet(request.POST, request.FILES)
         if formset.is_valid():
             formset.save()
+            return redirect('../')
     else:
         formset = CharacterFormSet(queryset=Player.objects.all())
 
@@ -48,10 +49,11 @@ def monsters(request):
         formset = CharacterFormSet(request.POST, request.FILES)
         if formset.is_valid():
             formset.save()
+            return redirect('../')
     else:
         formset = CharacterFormSet(queryset=Monster.objects.all())
 
-    return render(request, 'initiative/monster_list.html', {'formset': formset})
+        return render(request, 'initiative/monster_list.html', {'formset': formset})
 
 
 def hero(request, hero_name):
