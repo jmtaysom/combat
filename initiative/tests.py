@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.http import HttpRequest
 
 from initiative.views import index, characters, monsters
+from initiative.models import Character
 
 
 class IndexTest(TestCase):
@@ -51,3 +52,22 @@ class MonstersTest(TestCase):
         self.assertIn('<title>Combat Tracker</title>', html)
         self.assertIn('<table>', html)
         self.assertTrue(html.endswith('</html>'))
+
+class CharacterDetailTest(TestCase):
+
+    def setUp(self):
+        Character.objects.create(
+            name = 'Aldo',
+            initiative = 5,
+            armor_class = 15,
+            fortitude = 4,
+            reflex = 6,
+            will = 3,
+            hit_points = 14
+        )
+
+    def still_concious_test(self):
+        aldo = Character.objects.get(name='Aldo')
+        self.assertTrue(aldo.still_conscious())
+        aldo.damage_taken = 20
+        slef.assertFalse(aldo.still_conscious())

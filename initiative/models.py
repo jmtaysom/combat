@@ -30,3 +30,4 @@ class Player(Character):
 class Monster(Character):
     count = models.IntegerField(default=0)
     initiative_rolls = models.CharField(validators=[int_list_validator], max_length=50, default=0)
+
