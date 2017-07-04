@@ -20,7 +20,7 @@ class Character(models.Model):
         return self.name
 
     def still_conscious(self):
-        return self.hit_points >= 0
+        return self.hit_points - self.damage_taken >= 0
 
 
 class Player(Character):

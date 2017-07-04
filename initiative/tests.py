@@ -2,7 +2,7 @@ from django.core.urlresolvers import resolve
 from django.test import TestCase
 from django.http import HttpRequest
 
-from initiative.views import index, characters, monsters
+from initiative.views import index, characters, monsters, hero
 from initiative.models import Character
 
 
@@ -24,7 +24,7 @@ class IndexTest(TestCase):
 
 class CharactersTest(TestCase):
 
-    def test_root_url_resolves_to_chaaracter_view(self):
+    def test_root_url_resolves_to_character_view(self):
         found = resolve('/characters/')
         self.assertEqual(found.func, characters)
 
@@ -66,8 +66,17 @@ class CharacterDetailTest(TestCase):
             hit_points = 14
         )
 
-    def still_concious_test(self):
+    def test_still_concious(self):
         aldo = Character.objects.get(name='Aldo')
         self.assertTrue(aldo.still_conscious())
         aldo.damage_taken = 20
-        slef.assertFalse(aldo.still_conscious())
+        self.assertFalse(aldo.still_conscious(),
+                         msg='damage taken = {}'.format(aldo.damage_taken))
+
+    def test_character_detail_returns_aldo(self):
+        self.assertEqual(Character.objects.count(), 1)
+        aldo = Character.objects.first()
+        self.assertEqual(aldo.name, 'Aldo')
+
+
+
