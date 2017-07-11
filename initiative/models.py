@@ -31,3 +31,8 @@ class Monster(Character):
     count = models.IntegerField(default=0)
     initiative_rolls = models.CharField(validators=[int_list_validator], max_length=50, default=0)
 
+
+class MonsterList(models.Model):
+    monster = models.ForeignKey(Monster, on_delete=models.CASCADE)
+    initiative = models.IntegerField(default=0)
+
