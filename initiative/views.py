@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.forms import modelformset_factory
 
 from .forms import CharacterForm, CountForm, CharacterCountForm, MonsterForm
-from .models import Player, Monster
+from .models import Player, Monster, MonsterList
 
 
 # Create your views here.
@@ -54,6 +54,12 @@ def monsters(request):
         formset = CharacterFormSet(queryset=Monster.objects.all())
 
         return render(request, 'initiative/monster_list.html', {'formset': formset})
+
+def monster_list(request):
+    monsters = MonsterList.objects.all()
+    for monster in monsters:
+        print(monster.monster)
+    return render(request, 'initiative/monster_list2.html', {'monster_list':monsters})
 
 
 def hero(request, hero_name):

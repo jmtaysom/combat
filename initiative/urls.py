@@ -18,5 +18,6 @@ urlpatterns = [
     # ex: /characters/Marius/update/
     url(r'^characters/(?P<hero_name>[\w\s]+)/update/$', views.update, name='update'),
     url(r'^monsters/(?P<monster_name>[\w\s]+)/update/$', views.monster_update, name='monster_update'),
+    url(r'^monster_list/$', views.monster_list, name='monster_list'),
 
 ]

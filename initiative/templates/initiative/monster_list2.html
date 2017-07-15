@@ -1,0 +1,9 @@
+{% extends 'initiative/base.html' %}
+
+{% block content %}
+    <h4>Monsters</h4>
+    {% for monster in monster_list %}
+        <p>{{ monster.monster }}</p>
+
+    {% endfor %}
+{% endblock %}
