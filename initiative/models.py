@@ -33,7 +33,7 @@ class Monster(Character):
 
 
 class MonsterList(models.Model):
-    monster = models.ForeignKey(Monster, on_delete=models.CASCADE)
+    name = models.ForeignKey(Monster, on_delete=models.CASCADE)
     initiative = models.IntegerField(default=0)
 
     def __str__(self):

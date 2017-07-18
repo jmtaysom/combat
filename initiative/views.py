@@ -57,9 +57,13 @@ def monsters(request):
 
 def monster_list(request):
     monsters = MonsterList.objects.all()
-    for monster in monsters:
-        print(monster.monster)
-    return render(request, 'initiative/monster_list2.html', {'monster_list':monsters})
+    character_list = Player.objects.filter(present=True).order_by('-initiative')
+    result_list = sorted(
+        chain(character_list, monsters),
+        key=attrgetter('initiative'),
+        reverse=True)
+    context = {'character_list': result_list}
+    return render(request, 'initiative/index.html', context)
 
 
 def hero(request, hero_name):
