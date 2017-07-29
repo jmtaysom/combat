@@ -37,6 +37,6 @@ class MonsterList(models.Model):
     initiative = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.monster.name
+        return self.name
 
 
